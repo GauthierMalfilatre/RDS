@@ -18,9 +18,9 @@ fn handle_client(mut stream: TcpStream) {
 }
 
 fn main() -> std::io::Result<()> {
-    println!("Hello, world!");
 
-    // Can it raise ?
+    println!("Hello from my_RDS");
+
     let listener = net::TcpListener::bind("0.0.0.0:4242")?;
 
     loop {
