@@ -17,16 +17,19 @@ fn handle_client(mut stream: TcpStream) {
     }
 }
 
-fn main() -> std::io::Result<()> {
+fn main() {
 
     println!("Hello from my_RDS");
 
-    let listener = net::TcpListener::bind("0.0.0.0:4242")?;
+    let listener = net::TcpListener::bind("0.0.0.0:4242").unwrap();
 
     loop {
         for stream in listener.incoming() {
-            handle_client(stream?);
+            match stream {
+                Ok(stream) => handle_client(stream),
+                Err(e) => {println!("RDS Error: {e}"); break}
+            }
         }
     }
-    return Ok(());
+    // Should not return anything since its a server
 }
